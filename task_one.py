@@ -111,7 +111,7 @@ class TestGrabBrackets:
     def test_negative_check_not_balanced_input_with_mixed_brackets(self):
         assert grab_brackets("{[}(])") == ""
 
-    @pytest.mark.parametrize('invalid_input', ["{.}", "[]  {}", "!{}"])
+    @pytest.mark.parametrize('invalid_input', ["{.}", "[]  {}", "!{}", "{5}", "[]3", "1{}"])
     def test_negative_check_invalid_input(self, invalid_input):
         with pytest.raises(Exception):
             grab_brackets(invalid_input)
