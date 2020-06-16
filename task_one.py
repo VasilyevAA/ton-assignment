@@ -85,7 +85,7 @@ class TestGrabBrackets:
     def test_positive_check_calculate_with_terminate_sequence(self):
         assert grab_brackets("[]()]{}") == "{}[]()"
 
-    @pytest.mark.parametrize('infinity_str', ['{}', '[]', '()', '[][]', 'a{}b', '[a]{}'])
+    @pytest.mark.parametrize('infinity_str', ["{}", "[]", "()", "[][]", "a{}b", "[a]{}"])
     def test_positive_check_simple_infinity(self, infinity_str):
         assert grab_brackets(infinity_str) == INFINITY_CONST
 
@@ -97,17 +97,20 @@ class TestGrabBrackets:
 
     def test_positive_return_string_without_brackets_but_with_brackets_in_input(self):
         assert grab_brackets("[]{{assssdasd{{[]{{}}") == 'assssdasd'
+    
+    def test_positive_check_empty_string(self):
+        assert grab_brackets("") == ""
 
     def test_negative_check_not_balanced_input_with_wrong_first_bracket(self):
-        assert grab_brackets("{[]") == '[]'
+        assert grab_brackets("{[]") == "[]"
 
     def test_negative_check_not_balanced_input_with_wrong_last_bracket(self):
-        assert grab_brackets("()}") == '()'
+        assert grab_brackets("()}") == "()"
 
     def test_negative_check_not_balanced_input_with_mixed_brackets(self):
-        assert grab_brackets("{[}(])") == ''
+        assert grab_brackets("{[}(])") == ""
 
-    @pytest.mark.parametrize('invalid_input', ['{.}', '[]  {}', '!{}'])
+    @pytest.mark.parametrize('invalid_input', ["{.}", "[]  {}", "!{}"])
     def test_negative_check_invalid_input(self, invalid_input):
         with pytest.raises(Exception):
             grab_brackets(invalid_input)
