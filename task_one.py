@@ -85,9 +85,9 @@ class TestGrabBrackets:
     def test_positive_check_calculate_with_terminate_sequence(self):
         assert grab_brackets("[]()]{}") == "{}[]()"
 
-    @pytest.mark.parametrize('infinity_str', ['{}', '[]', '()', '[][]', 'a{}b'])
+    @pytest.mark.parametrize('infinity_str', ['{}', '[]', '()', '[][]', 'a{}b', '[a]{}'])
     def test_positive_check_simple_infinity(self, infinity_str):
-        assert grab_brackets("[]") == INFINITY_CONST
+        assert grab_brackets(infinity_str) == INFINITY_CONST
 
     def test_positive_check_output_for_same_value(self):
         """
