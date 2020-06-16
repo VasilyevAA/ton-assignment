@@ -11,7 +11,6 @@ import pytest
 
 INFINITY_CONST = "Infinite"
 
-
 OPPOSITE_BRACKET = {
     '{': '}',
     '(': ')',
@@ -32,6 +31,8 @@ SUPPORTED_SYMBOLS = string.ascii_letters + ALL_BRACKETS
 
 
 def grab_brackets(some_str):
+    if not isinstance(some_str, str):
+        raise Exception('Invalid input datatype. First arg should be string (str type)')
     processing_str = list(some_str)
     max_len_for_infinity = len(processing_str)
 
@@ -97,7 +98,7 @@ class TestGrabBrackets:
 
     def test_positive_return_string_without_brackets_but_with_brackets_in_input(self):
         assert grab_brackets("[]{{assssdasd{{[]{{}}") == 'assssdasd'
-    
+
     def test_positive_check_empty_string(self):
         assert grab_brackets("") == ""
 
@@ -114,3 +115,7 @@ class TestGrabBrackets:
     def test_negative_check_invalid_input(self, invalid_input):
         with pytest.raises(Exception):
             grab_brackets(invalid_input)
+
+    def test_negative_use_none_in_input(self):
+        with pytest.raises(Exception):
+            grab_brackets(None)
